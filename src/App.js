@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 // import Packages
 import { v4 as uuidv4 } from 'uuid';
 import Swal from "sweetalert2";
+import Loading from './components/loading/Loading';
 function App() {
     const [loading, setloading] = useState(true); // Pre-loader before page renders
     const [tasks, setTasks] = useState([]); // Task State
@@ -83,33 +84,18 @@ function App() {
         <>
             {
                 loading ?
-                    <div className="spinnerContainer">
-                        <div className="spinner-grow text-primary" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
-                        <div className="spinner-grow text-secondary" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
-                        <div className="spinner-grow text-success" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
-                        <div className="spinner-grow text-danger" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
-                        <div className="spinner-grow text-warning" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
-                    </div> :
+                    <Loading /> :
                     <div className="container">
                         <Header showForm={() => setShowAddTask(!showAddTask)} changeTextAndColor={showAddTask} />
+
                         {showAddTask && <AddTask onSave={addTask} />}
                       
                         <h3>Number of Tasks: {tasks.length}</h3>
                       
                         {
                             tasks.length > 0 ?
-                                (<Tasks tasks={tasks} onDelete={deleteTask} onEdit={editTask} />) :
-                                ('No Task Found!')
+                            (<Tasks tasks={tasks} onDelete={deleteTask} onEdit={editTask} />) :
+                            ('No Task Found!')
                         }
                     </div>
             }
