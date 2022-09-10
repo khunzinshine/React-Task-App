@@ -28,6 +28,7 @@ function App() {
     } else {
       setTasks(getTasks);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Add Task
